@@ -26,7 +26,6 @@ function make_source_list(source_list)
       local name = S.obs_source_get_name(source)
       S.obs_property_list_add_string(source_list, name, name)
     end
-
   end
 
   S.source_list_release(sources)
@@ -39,7 +38,6 @@ function make_scene_list(scene_list)
       local name = S.obs_source_get_name(scene)
       S.obs_property_list_add_string(scene_list, name, name)
     end
-
   end
 
   S.source_list_release(scenes)
@@ -55,12 +53,9 @@ function animate()
     x_increment = 100 + (counter * 10)  -- was 20 and 5
     if h > 3000 then
       y_increment = 7500
-
     else
       y_increment = 100 + (counter * 10)  -- was 20 and 5
-
     end
-
   else
     x_increment = 500
     y_increment = 500
@@ -80,13 +75,11 @@ function animate()
     if w >= target_width then
       w = target_width
     end
-
   elseif w > target_width then
     w = w - x_increment
     if w <= target_width then
       w = target_width
     end
-
   end
 
   if h < target_height then
@@ -94,13 +87,11 @@ function animate()
     if h >= target_height then
       h = target_height
     end
-
   elseif h > target_height then
     h = h - y_increment
     if h <= target_height then
       h = target_height
     end
-
   end
 
   pos_x = (canvas_width / 2) - (w / 2)
@@ -155,9 +146,7 @@ function bounce()
         bounce_width = target_width + (bounce_counter * bounce_offset)
         bounce_counter = bounce_counter - 1
       end
-
     end
-
   elseif target_width > (target_height * 2.5) then  -- wide, bounce height
     print("wide")
     if h < bounce_height then
@@ -166,7 +155,6 @@ function bounce()
         h = bounce_height
         bounce_height = target_height - (bounce_counter * bounce_offset)
       end
-
     elseif h > target_height then
       h = h - bounce_increment
       if h <= bounce_height then
@@ -174,9 +162,7 @@ function bounce()
         bounce_height = target_height + (bounce_counter * bounce_offset)
         bounce_counter = bounce_counter - 1
       end
-
     end
-
   else
     print("none")
     -- no bounce
@@ -193,14 +179,11 @@ function bounce()
     w = target_width
     h = target_height
 
-  resize_instance(w, h, pos_x, pos_Y)
-  
+    resize_instance(w, h, pos_x, pos_Y) 
   end
-
 end
 
 function update_size(settings)
-
   local source = S.obs_get_source_by_name(source_name)
   width = S.obs_source_get_width(source)
   height = S.obs_source_get_height(source)
@@ -213,18 +196,15 @@ function update_size(settings)
     target_height = height
 
     if target_width > 0 then
-        if target_height > 0 then
-          counter = 0
-          print("resizing to " .. target_width .. "x" .. target_height)
-          S.timer_remove(animate)
-          S.timer_remove(update_size)
-          S.timer_add(animate, interval)
-        end
-
+      if target_height > 0 then
+        counter = 0
+        print("resizing to " .. target_width .. "x" .. target_height)
+        S.timer_remove(animate)
+        S.timer_remove(update_size)
+        S.timer_add(animate, interval)
+      end
     end
-
   end
-
 end
 
 function get_instance_position()
